@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NemoXn SMP</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #f0f0f0;
+    }
+
+    header {
+      background: linear-gradient(90deg, #8a2be2, #ff1493);
+      padding: 1rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .ip-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .ip-btn {
+      background: #8a2be2;
+      padding: 1rem 2rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 10px #8a2be2;
+    }
+    .ip-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff1493;
+    }
+
+    .discord-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #5865F2;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      width: fit-content;
+      margin: 1rem auto;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 10px #5865F2;
+      text-decoration: none;
+    }
+    .discord-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #7289da;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a1a1a;
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #8a2be2;
+      max-width: 600px;
+      width: 90%;
+      z-index: 1000;
+    }
+    .popup h2 {
+      margin-top: 0;
+    }
+    .popup .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #ff1493;
+    }
+
+    .copied {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #8a2be2;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #ff1493;
+      display: none;
+      z-index: 2000;
+    }
+
+    .admin-panel {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 25px #ff1493;
+      max-width: 500px;
+      width: 90%;
+      z-index: 1500;
+    }
+    .admin-panel h2 {
+      margin-top: 0;
+    }
+    .admin-panel button {
+      background: #8a2be2;
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 10px #8a2be2;
+    }
+    .admin-panel button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff1493;
+    }
+    .admin-panel .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #ff1493;
+    }
+
+    footer {
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NemoXn SMP</h1>
+    <p>Java & Eaglercraft | Chill Lifesteal Survival</p>
+  </header>
+
+  <section class="section">
+    <h2>Join the Server</h2>
+    <div class="ip-buttons">
+      <div class="ip-btn" onclick="copyIP('java')">Java IP</div>
+      <div class="ip-btn" onclick="copyIP('eagler')">Eagler IP</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Community</h2>
+    <div class="discord-btn" onclick="openPopup('discordPopup')">Join Discord</div>
+    <a class="discord-btn" href="https://patreon.com/NemoXnSMP?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank">Support on Patreon</a>
+  </section>
+
+  <section class="section">
+    <div class="ip-buttons">
+      <div class="ip-btn" onclick="openPopup('aboutPopup')">About Us</div>
+      <div class="ip-btn" onclick="openPopup('creditsPopup')">Credits</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 NemoXN SMP</p>
+  </footer>
+
+  <div class="popup" id="aboutPopup">
+    <span class="close" onclick="closePopup('aboutPopup')">✖</span>
+    <h2>About Us</h2>
+    <p>
+      Welcome to NemoXn SMP... A simple 1.21.5 lifesteal server with no crazy unvanilla stuff,  
+      simple non toxic people, and a cool chill community.  
+      <br><br>
+      → No crazy plugins ✅ <br>
+      → Simple vanilla (home, tpa only) <br>
+      → Simple spawn (straight into the game) <br>
+      → Completely anarchy (except spawn griefing) <br>
+      → Non-toxic community <br>
+      → Multiple seasons <br>
+      → Always open, 24/7 <br>
+      → Custom IP & website <br>
+      → Rewards & giveaways <br>
+      → No admin abuse <br>
+      → Multiple PvP types (crystal, sword, mace) <br>
+      → Open for Java, Eagler & Cracked <br>
+    </p>
+  </div>
+
+  <div class="popup" id="creditsPopup">
+    <span class="close" onclick="closePopup('creditsPopup')">✖</span>
+    <h2>Credits</h2>
+    <p>
+      DemXn <br>
+      Nemotooth (Founder) <br>
+      Friendlyword <br>
+      Potato <br>
+    </p>
+  </div>
+
+  <div class="popup" id="discordPopup">
+    <span class="close" onclick="closePopup('discordPopup')">✖</span>
+    <h2>Discord Invite</h2>
+    <p>Click below to copy the Discord invite link:</p>
+    <div class="ip-btn" onclick="copyDiscord()">Copy Invite</div>
+  </div>
+
+  <div class="popup" id="adminLogin">
+    <span class="close" onclick="closePopup('adminLogin')">✖</span>
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Enter Password" style="padding:10px; width: 100%; border-radius:8px; border:none; margin-bottom:10px;">
+    <button onclick="checkAdmin()">Login</button>
+  </div>
+
+  <div class="admin-panel" id="adminPanel">
+    <span class="close" onclick="closePopup('adminPanel')">✖</span>
+    <h2>Admin Panel</h2>
+    <textarea id="broadcastMsg" rows="4" placeholder="Enter announcement..."></textarea><br>
+    <button onclick="broadcast()">Broadcast</button>
+  </div>
+
+  <div class="copied" id="copiedMsg">Copied!</div>
+
+  <script>
+    function copyIP(type) {
+      let ip = "";
+      if (type === "java") ip = "java.nemoxn.top";
+      if (type === "eagler") ip = "eagler.nemoxn.top";
+      navigator.clipboard.writeText(ip);
+      showCopied();
+    }
+
+    function copyDiscord() {
+      const link = "https://discord.gg/wAhUMZZqCn";
+      navigator.clipboard.writeText(link);
+      showCopied();
+    }
+
+    function showCopied() {
+      let msg = document.getElementById("copiedMsg");
+      msg.style.display = "block";
+      setTimeout(() => { msg.style.display = "none"; }, 2000);
+    }
+
+    function openPopup(id) {
+      document.getElementById(id).style.display = "block";
+    }
+    function closePopup(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    document.addEventListener("keydown", function(e) {
+      if (e.ctrlKey && e.shiftKey && e.key === "A") {
+        openPopup("adminLogin");
+      }
+    });
+
+    function checkAdmin() {
+      const pass = document.getElementById("adminPass").value;
+      if (pass === "nemoxnsmpadmin") {
+        closePopup("adminLogin");
+        openPopup("adminPanel");
+      } else {
+        alert("Wrong password!");
+      }
+    }
+
+    function broadcast() {
+      const msg = document.getElementById("broadcastMsg").value;
+      if (!msg) return alert("Enter a message!");
+      fetch("https://discord.com/api/webhooks/1407055326431285279/141MsXzO02XEUfjHhnrY8a4R7oUuo-fWovY7_f96YGuG7WXPmjKBjtZMdYQ_KHYY_VbP", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: msg })
+      }).then(() => {
+        alert("Announcement sent!");
+        document.getElementById("broadcastMsg").value = "";
+      });
+    }
+  </script>
+</body>
+</html>
